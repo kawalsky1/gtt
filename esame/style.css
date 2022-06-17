@@ -1,0 +1,92 @@
+body {
+	width: 99%;
+}
+
+header {
+	width: 15%;
+	padding: 15px;
+	border: 3px solid #000000;
+}
+
+#logo {
+	width: 200px;
+}
+
+nav {
+	width: 98%;
+	padding: 15px;
+	background-color: #cccccc;
+	text-align:center;
+}
+
+.menu {
+	display: inline;
+	padding: 15px;
+	border: 1px solid #000000;
+}
+
+.image {
+width: 200px;
+height: 200px;
+}
+
+table {
+table-layout: fixed;
+width: 400px;
+border: 1px solid #000000;
+border-spacing: 5px;
+}
+
+td { border: 1px dotted #cccccc; }
+
+article {
+	width: 100%;
+	padding: 15px;
+	float: left;
+}
+
+strong {
+	color: #0000FF;
+}
+
+section {
+	width: 50%;
+	margin-top: 15px;
+}
+
+aside {
+	width: 40%;
+	float: right;
+	margin-top: 15px;
+}
+
+#approfondimenti {
+	border: 2px solid #00008B;
+	background-color: #E0FFFF;
+	width: 40%;
+}
+	
+footer {
+    width: 96%;
+    padding: 25px;
+    color: #ffffff;
+    clear: left;
+    background-color: #000000;
+	position: relative;
+	top: 50px;
+}
+
+.info{
+	border: 2px solid #00008B;
+	background-color: #E0FFFF;
+	
+}
+
+.mappa {
+	height: 300px;
+	width: 300px;
+}
+
+.title {
+	color: #0000FF;
+}
