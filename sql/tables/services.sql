@@ -1,11 +1,12 @@
 create table services(
-idServicePK int not null auto_increment,
-primary key (idServicePK),
-name varchar(255) not null,
-category varchar(255) not null,
-type varchar(255) not null,
-description varchar(255) not null,
-price decimal not null,
-timing int not null,
-duration varchar(255)
+idServicePK int not null auto_increment, -- primary key
+primary key (idServicePK), -- set primary key
+name varchar(255) not null, -- service name
+category varchar(255) not null, -- service category
+type varchar(255) not null, -- service type
+description varchar(255) not null, -- service description
+n int not null, -- number of tickets or services bought by users
+price decimal(10,2) not null, -- price of service
+timing int not null, -- time 1, 2,3....
+duration varchar(255) not null -- duration years, days, hours, ecc...
 );
