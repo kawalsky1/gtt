@@ -104,6 +104,7 @@ require "../sessions/userSession.php";
       <a href="/gtt/src/afterLogin/websiteAfterLogin/tickets/tickets.php" class="w3-bar-item w3-button w3-padding-large">Biglietti</a>
       <a href="/gtt/src/afterLogin/websiteAfterLogin/subscriptions/subscriptions.php" class="w3-bar-item w3-button w3-padding-large">Abbonamenti</a>
       <?php
+        // 0 user, 1 admin
         if($_SESSION['idUserTypeFK']==1){
           echo '<a href="/gtt/src/afterLogin/adminServices/adminServices.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Servizi</a>';
         } else {
@@ -125,10 +126,119 @@ require "../sessions/userSession.php";
 <!-- Header -->
 <div class="w3-container w3-blues w3-center" style="position:center; padding:128px 16px">
 <h1>SERVICES</h1>
- <!-- 
-    TODO: 
-          Implementing the visualization of the services on the DB for users.
- -->
+  <?php 
+    // Function to get data from admin
+    function getDataAdmin(string $query) {
+      // Connection string
+      $connection = new mysqli("127.0.0.1","root","","gtt");
+      $result = $connection->query($query);
+
+      // Get data
+      if($result->num_rows==0) {
+        return "Nessun risultato trovato.";
+      } else {
+        // Creating title of the table
+        $table = '<table style="border-collapse: collapse;  width: 100%;">
+                    <tr>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">ID</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">NOME</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">TIPO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">CATEGORIA</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DESCRIZIONE</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">NUMERO DI PRODOTTI RILASCIATI</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">PREZZO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DURATA</th>                    
+                    </tr>';
+        // Merge the result in another array to be iterable subsequently
+        while($row = $result->fetch_array())
+        {
+          $rows[] = $row;
+        }
+        // Loop on data creating HTML table
+        foreach($rows as $row)
+        {
+          echo $row['CountryCode'];
+        }
+        /* free result set */
+        $result->close();
+
+        /* close connection */
+        $connection->close();
+      }
+    }    
+
+
+    // function to get data from users
+    function getDataUsers(string $query) {
+      // Connection string
+      $connection = new mysqli("127.0.0.1","root","","gtt");
+      $result = $connection->query($query);
+
+      // Get data
+      if($result->num_rows==0) {
+        return "Nessun risultato trovato.";
+      } else {
+        // Creating title of the table
+        $table = '<table style="border-collapse: collapse;  width: 100%;">
+                    <tr>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">NOME</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">TIPO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">CATEGORIA</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DESCRIZIONE</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">PREZZO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DURATA</th>                    
+                    </tr>';
+        // Merge the result in another array to be iterable subsequently
+        while($row = $result->fetch_array())
+        {
+          $rows[] = $row;
+        }
+        // Loop on data creating HTML table
+        foreach($rows as $row)
+        {
+          $table = $table . '
+            <tr>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['name'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['type'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['category'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['description'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">&euro;' . $row['price'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['timing'] . ' ' . $row['duration'] . '</td>
+            </tr>'; 
+        }
+        
+        // Close the table tag
+        $table = $table . "</table>";
+
+        // Free result set
+        $result->close();
+
+        // Close connection
+        $connection->close();
+
+        return $table;
+      }
+    }
+
+    // Function to get the services returning a table:
+    // ADMIN --> With the functionalities to add, remove or update the fields
+    // USERS --> Only to view and buy services 
+    function getData(int $userType){
+      $q = "SELECT * FROM services";
+      if($userType==1){
+        return getDataAdmin($q);
+      } else {
+        return getDataUsers($q);
+      }
+    }
+
+    // 0 user, 1 admin
+    if($_SESSION['idUserTypeFK']==1){
+      echo getData($_SESSION['idUserTypeFK']);
+    } else {
+      echo getData($_SESSION['idUserTypeFK']);
+    }
+  ?>
 </div>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
