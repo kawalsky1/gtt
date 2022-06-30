@@ -108,8 +108,7 @@
 <!-- Header -->
 <div class="w3-container w3-blues w3-center" style="position:center; padding:128px 16px">
 <h1>REGISTRATI</h1>
-<img src="/gtt/src/img/logo.png">
-<br><br>
+<br>
 <form action="/gtt/src/signin/signinBE.php" method="POST">
   <label for="fname">Username* </label>
   <input type="text" id="username" name="username"><br><br>

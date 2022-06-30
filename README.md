@@ -22,4 +22,4 @@ The user with idUserTypeFK = 0 is a normal user, instead the user with idUserTyp
 
 ✅ in /gtt/src/afterLogin/userServices/userServices.php create a php script to get the services available on the db for the users registered.
 
-✅ in /gtt/src/afterLogin/adminServices/adminServices.php create a php script to get the services available on the db for the admin and insert the functionality to update, add and delete the services by admin.
+✅ in /gtt/src/afterLogin/adminServices/adminServices.php create a php script to get the services available on the db for the admin and insert the functionality to update, add and delete the services by admin.git checkout develop
