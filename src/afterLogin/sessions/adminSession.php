@@ -16,7 +16,7 @@
 		}
 		if ($_SESSION['idUserTypeFK']!=1){
 			echo "Accesso non autorizzato.";
-			header("Refresh: 3; url=/gtt/src/afterLogin/services/services.php");
+			header("Refresh: 3; url=/gtt/src/afterLogin/userServices/userServices.php");
 			die();
 		}	
 	}	

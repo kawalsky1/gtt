@@ -4,7 +4,7 @@ require "../sessions/adminSession.php";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Gruppo Trollatori Torinese - Home</title>
+<title>Gruppo Torinese Trasporti - Home</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/gtt/src/css/w3.css" />
@@ -104,6 +104,7 @@ require "../sessions/adminSession.php";
       <a href="/gtt/src/afterLogin/websiteAfterLogin/tickets/tickets.php" class="w3-bar-item w3-button w3-padding-large">Biglietti</a>
       <a href="/gtt/src/afterLogin/websiteAfterLogin/subscriptions/subscriptions.php" class="w3-bar-item w3-button w3-padding-large">Abbonamenti</a>
       <?php
+        // 0 user, 1 admin
         if($_SESSION['idUserTypeFK']==1){
           echo '<a href="/gtt/src/afterLogin/adminServices/adminServices.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Servizi</a>';
         } else {
@@ -124,14 +125,202 @@ require "../sessions/adminSession.php";
 
 <!-- Header -->
 <div class="w3-container w3-blues w3-center" style="position:center; padding:128px 16px">
-<h1>ADMIN SERVICES</h1>
+<h1>SERVIZI ADMIN</h1>
+  <?php 
+    // Function to get data from admin
+    function getDataAdmin(string $query) {
+      // Connection string
+      $connection = new mysqli("127.0.0.1","root","","gtt");
+      $result = $connection->query($query);
 
- <!-- 
-    TODO: 
-          Implementing the visualization of the services on the DB, the admin can also add, delete and update these data.
- --> 
+      // Get data
+      if($result->num_rows==0) {
+        return "Nessun risultato trovato.";
+      } else {
+        // Creating title of the table
+        $table = '<table style="border-collapse: collapse;  width: 100%;">
+                    <tr>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">ID</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">NOME</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">TIPO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">CATEGORIA</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DESCRIZIONE</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">NUMERO DI PRODOTTI RILASCIATI</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">VALUTA</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">PREZZO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">TEMPO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DURATA</th>                    
+                    </tr>';
+        // Merge the result in another array to be iterable subsequently
+        while($row = $result->fetch_array())
+        {
+          $rows[] = $row;
+        }
+        // Loop on data creating HTML table
+        foreach($rows as $row)
+        {
+          $table = $table . '
+            <tr>
+              <td id="id_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['idServicePK'] . '</td>
+              <td id="name_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['name'] . '</td>
+              <td id="type_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['type'] . '</td>
+              <td id="category_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['category'] . '</td>
+              <td id="description_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['description'] . '</td>
+              <td id="n_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['n'] . '</td>
+              <td id="valuta_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">&euro;</td> 
+              <td id="price_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['price'] . '</td>
+              <td id="timing_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['timing'] . '</td>
+              <td id="duration_' . $row['idServicePK'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['duration'] . '</td>
+            </tr>'; 
+        }
+
+        // Close the table tag
+        $table = $table . "</table>";
+
+        // Free result set
+        $result->close();
+
+        // Close connection
+        $connection->close();
+
+        return $table;
+      }
+    }    
+
+
+    // function to get data from users
+    function getDataUsers(string $query) {
+      // Connection string
+      $connection = new mysqli("127.0.0.1","root","","gtt");
+      $result = $connection->query($query);
+
+      // Get data
+      if($result->num_rows==0) {
+        return "Nessun risultato trovato.";
+      } else {
+        // Creating title of the table
+        $table = '<table style="border-collapse: collapse;  width: 100%;">
+                    <tr>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">NOME</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">TIPO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">CATEGORIA</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DESCRIZIONE</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">PREZZO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DURATA</th>                    
+                    </tr>';
+        // Merge the result in another array to be iterable subsequently
+        while($row = $result->fetch_array())
+        {
+          $rows[] = $row;
+        }
+        // Loop on data creating HTML table
+        foreach($rows as $row)
+        {
+          $table = $table . '
+            <tr>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['name'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['type'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['category'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['description'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">&euro;' . $row['price'] . '</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['timing'] . ' ' . $row['duration'] . '</td>
+            </tr>'; 
+        }
+        
+        // Close the table tag
+        $table = $table . "</table>";
+
+        // Free result set
+        $result->close();
+
+        // Close connection
+        $connection->close();
+
+        return $table;
+      }
+    }
+
+    // Function to get the services returning a table:
+    // ADMIN --> With the functionalities to add, remove or update the fields
+    // USERS --> Only to view and buy services 
+    function getData(int $userType){
+      $q = "SELECT * FROM services";
+      if($userType==1){
+        return getDataAdmin($q);
+      } else {
+        return getDataUsers($q);
+      }
+    }
+
+    // 0 user, 1 admin
+    if($_SESSION['idUserTypeFK']==1){
+      echo getData($_SESSION['idUserTypeFK']);
+    } else {
+      echo getData($_SESSION['idUserTypeFK']);
+    }
+  ?>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div style="padding-left: 50px;">
+  <h1>AGGIUNGI</h1>
+  <form action="/gtt/src/afterLogin/adminServices/actions/add.php" method='POST'>
+    <label for="fname">Nome* </label>
+    <input type="text" id="nome" name="nome"><br><br>
+    <label for="lname">Categoria* </label>
+    <input type="text" id="categoria" name="categoria"><br><br>
+    <label for="lname">Tipo* </label>
+    <input type="text" id="tipo" name="tipo"><br><br>
+    <label for="fname">Descrizione* </label>
+    <input type="text" id="descrizione" name="descrizione"><br><br>
+    <label for="fname">Numero di biglietti/abbonamenti* </label>
+    <input type="text" id="n" name="n"><br><br>
+    <label for="fname">Prezzo* </label>
+    <input type="text" id="prezzo" name="prezzo"><br><br>
+    <label for="fname">Timing* </label>
+    <input type="text" id="timing" name="timing"><br><br>
+    <label for="fname">Durata* </label>
+    <input type="text" id="durata" name="durata"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<br><br>
+
+<div style="padding-left: 50px;">
+  <h1>MODIFICA</h1>
+  <form action="/gtt/src/afterLogin/adminServices/actions/update.php" method="POST">
+    <label for="fname">ID* </label>
+    <input type="text" id="idU" name="idU"><br><br>
+    <label for="fname">Nome* </label>
+    <input type="text" id="nomeU" name="nomeU"><br><br>
+    <label for="lname">Categoria* </label>
+    <input type="text" id="categoriaU" name="categoriaU"><br><br>
+    <label for="lname">Tipo* </label>
+    <input type="text" id="tipoU" name="tipoU"><br><br>
+    <label for="fname">Descrizione* </label>
+    <input type="text" id="descrizioneU" name="descrizioneU"><br><br>
+    <label for="fname">Numero di biglietti/abbonamenti* </label>
+    <input type="text" id="nU" name="nU"><br><br>
+    <label for="fname">Prezzo* </label>
+    <input type="text" id="prezzoU" name="prezzoU"><br><br>
+    <label for="fname">Timing* </label>
+    <input type="text" id="timingU" name="timingU"><br><br>
+    <label for="fname">Durata* </label>
+    <input type="text" id="durataU" name="durataU"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<br><br>
+<div style="padding-left: 50px;">
+  <h1>ELIMINA</h1>
+  <form action="/gtt/src/afterLogin/adminServices/actions/delete.php" method='POST'>
+    <label for="fname">ID* </label> <button> Elimina </button>
+    <input type="text" id="id" name="id"><br><br>
+  </form>
+</div>
+
+<br><br><br><br><br><br><br><br><br>
 <!-- Footer -->
 <footer style="width:101%; background-color: black; color:white;" class="w3-container w3-padding-64 w3-center w3-opacity">  
   <div class="w3-xlarge w3-padding-32">
@@ -142,7 +331,7 @@ require "../sessions/adminSession.php";
     <i class="fa fa-twitter w3-hover-opacity"></i>
     <i class="fa fa-linkedin w3-hover-opacity"></i>
  </div>
- <p>Gruppo Trollatori Torinese - <a href="https://www.gtt.to.it/cms/" target="_blank">GTT</a></p>
+ <p>Gruppo Torinese Trasporti - <a href="https://www.gtt.to.it/cms/" target="_blank">GTT</a></p>
  <p>Powered by Caterina Riedling & Laura Pelizza</p>
 </footer>
 
@@ -159,6 +348,5 @@ function toggle() {
   }
 }
 </script>
-
 </body>
 </html>

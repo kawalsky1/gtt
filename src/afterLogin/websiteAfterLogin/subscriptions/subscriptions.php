@@ -4,7 +4,7 @@ require "../../sessions/userSession.php";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Gruppo Trollatori Torinese - Abbonamenti</title>
+  <title>Gruppo Torinese Trasporti - Abbonamenti</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/gtt/src/css/w3.css" />
@@ -189,7 +189,7 @@ require "../../sessions/userSession.php";
       <i class="fa fa-twitter w3-hover-opacity"></i>
       <i class="fa fa-linkedin w3-hover-opacity"></i>
   </div>
-  <p>Gruppo Trollatori Torinese - <a href="https://www.gtt.to.it/cms/" target="_blank">GTT</a></p>
+  <p>Gruppo Torinese Trasporti - <a href="https://www.gtt.to.it/cms/" target="_blank">GTT</a></p>
   <p>Powered by Caterina Riedling & Laura Pelizza</p>
   </footer>
 

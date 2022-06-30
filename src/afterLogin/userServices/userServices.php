@@ -4,7 +4,7 @@ require "../sessions/userSession.php";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Gruppo Trollatori Torinese - Home</title>
+<title>Gruppo Torinese Trasporti - Home</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/gtt/src/css/w3.css" />
@@ -125,7 +125,7 @@ require "../sessions/userSession.php";
 
 <!-- Header -->
 <div class="w3-container w3-blues w3-center" style="position:center; padding:128px 16px">
-<h1>SERVICES</h1>
+<h1>SERVIZI</h1>
   <?php 
     // Function to get data from admin
     function getDataAdmin(string $query) {
@@ -146,7 +146,9 @@ require "../sessions/userSession.php";
                       <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">CATEGORIA</th>
                       <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DESCRIZIONE</th>
                       <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">NUMERO DI PRODOTTI RILASCIATI</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">VALUTA</th>
                       <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">PREZZO</th>
+                      <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">TEMPO</th>
                       <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">DURATA</th>                    
                     </tr>';
         // Merge the result in another array to be iterable subsequently
@@ -157,13 +159,31 @@ require "../sessions/userSession.php";
         // Loop on data creating HTML table
         foreach($rows as $row)
         {
-          echo $row['CountryCode'];
+          $table = $table . '
+            <tr>
+              <td id="id_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['id'] . '</td>
+              <td id="name_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['name'] . '</td>
+              <td id="type_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['type'] . '</td>
+              <td id="category_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['category'] . '</td>
+              <td id="description_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['description'] . '</td>
+              <td id="n_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['n'] . '</td>
+              <td id="valuta_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">&euro;</td> 
+              <td id="price_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['price'] . '</td>
+              <td id="timing_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['timing'] . '</td>
+              <td id="duration_' . $row['id'] . '" style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $row['duration'] . '</td>
+            </tr>'; 
         }
-        /* free result set */
+
+        // Close the table tag
+        $table = $table . "</table>";
+
+        // Free result set
         $result->close();
 
-        /* close connection */
+        // Close connection
         $connection->close();
+
+        return $table;
       }
     }    
 
@@ -252,11 +272,9 @@ require "../sessions/userSession.php";
     <i class="fa fa-twitter w3-hover-opacity"></i>
     <i class="fa fa-linkedin w3-hover-opacity"></i>
  </div>
- <p>Gruppo Trollatori Torinese - <a href="https://www.gtt.to.it/cms/" target="_blank">GTT</a></p>
+ <p>Gruppo Torinese Trasporti - <a href="https://www.gtt.to.it/cms/" target="_blank">GTT</a></p>
  <p>Powered by Caterina Riedling & Laura Pelizza</p>
 </footer>
-
-
 
 <script>
 // Used to toggle the menu on small screens when clicking on the menu button

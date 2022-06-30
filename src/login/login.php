@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Gruppo Trollatori Torinese - Login</title>
+<title>Gruppo Torinese Trasporti - Login</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/gtt/src/css/w3.css" />
@@ -107,9 +107,8 @@
 
 <!-- Header -->
 <div class="w3-container w3-blues w3-center" style="position:center; padding:128px 16px">
-<h1>LOGIN</h1>
 <img src="/gtt/src/img/logo.png">
-<br><br>
+<br><br><br><br>
 <form action="/gtt/src/login/loginBE.php" method='POST'>
   <label for="fname">Username:</label>
   <input type="text" id="username" name="username"><br><br>
@@ -130,7 +129,7 @@
     <i class="fa fa-twitter w3-hover-opacity"></i>
     <i class="fa fa-linkedin w3-hover-opacity"></i>
  </div>
- <p>Gruppo Trollatori Torinese - <a href="https://www.gtt.to.it/cms/" target="_blank">GTT</a></p>
+ <p>Gruppo Torinese Trasporti - <a href="https://www.gtt.to.it/cms/" target="_blank">GTT</a></p>
  <p>Powered by Caterina Riedling & Laura Pelizza</p>
 </footer>
 
