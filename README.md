@@ -1,4 +1,4 @@
-# GTT (Gruppo Torinese Trollatori)
+# GTT (Gruppo Torinese Trasporti)
 
 This is the project for the exam.
 
