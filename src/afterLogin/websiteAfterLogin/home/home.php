@@ -124,22 +124,25 @@ require "../../sessions/userSession.php";
 
 <!-- Header -->
 <div class="w3-container w3-blues w3-center" style="position:center; padding:128px 16px">
-  <h1 class="w3-margin w3-jumbo">SIAMO</h1><h1 class="w3-margin w3-jumbo">SEMPRE IN RITARDO !!!</h1>
-  <p class="w3-xlarge">Prendiamo d'esmpio i nostri colleghi di Trenitalia,</p><p class="w3-xlarge">ogni pullman arriva con almeno mezz'ora di ritardo.</p>
+  <h1 class="w3-margin w3-jumbo">NIGHT BUS</h1><h1 class="w3-margin w3-jumbo">ESTATE</h1>
+  <p class="w3-xlarge">Abbiamo esteso le nostre linee notturne,</p><p class="w3-xlarge">per garantire un miglior servizio ai nostri clienti.</p>
+  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">
+    <a style="text-decoration:none;" href="/gtt/src/login/login.php">Accedi</a>
+  </button>
 </div>
-<br><br>
+
 <!-- First Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
     <div class="w3-twothird">
-      <h1>Gruppo Torinese Trollatori</h1>
-      <h5 class="w3-padding-32">I nostri mezzi, hanno l'autodistruzione integrata.</h5>
+      <h1>Gruppo Torinese Trasporti</h1>
+      <h5 class="w3-padding-32">Gli orari dei night bus saranno estesi per tutto il periodo estivo.</h5>
 
-      <p class="w3-text-grey">Una volta raggiunto il kilometraggio finale, il pullman inizierà il processo di auto-distruzione. I nostri mezzi sono stati progettati per essere auto incendiabili anche mentre le persone sono a bordo!!! Ci teniamo molto alla sicurezza dei nostri clienti.</p>
+      <p class="w3-text-grey">Dopo la mezzanotte, i nostri mezzi saranno attivi fino alle 6:00 del mattino, per garantire un servizio migliore e poter permettere alla night life di potersi spostare durante tutti gli orari notturni.</p>
     </div>
 
     <div class="w3-third w3-center">
-      <img style="width: 80%" src="/gtt/src/img/home/pullman_in_fiamme.jpg" alt="Pullman gtt in fiamme">
+      <img style="width: 80%" src="/gtt/src/img/home/mappa_night_buster_estate_2022.jpg" alt="Pullman gtt in fiamme">
     </div>
   </div>
 </div>

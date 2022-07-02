@@ -153,6 +153,7 @@ require "../../sessions/userSession.php";
         </tr>
       </tbody>
       </table>
+      <p>Orari ufficio/segreteria Corso Francia 6 Torino, tel: 011 067 2000</p>
   </div>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   <!-- Footer -->
