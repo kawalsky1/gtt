@@ -380,6 +380,9 @@ function setCategory() {
     for (i = 0; i < select.length; i++) {
       x.remove(i);
     }
+    for (i = 0; i < select.length; i++) {
+      x.remove(i);
+    }
     let option = document.createElement("option");
     option.value = "reteUrbanaS";
     option.text = "rete urbana + suburbana";
@@ -403,6 +406,9 @@ function setCategory() {
       x.remove(i);
     }
   } else {
+    for (i = 0; i < select.length; i++) {
+      x.remove(i);
+    }
     for (i = 0; i < select.length; i++) {
       x.remove(i);
     }
