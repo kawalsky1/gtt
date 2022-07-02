@@ -124,8 +124,24 @@ require "../sessions/adminSession.php";
   </div>
 
 <!-- Header -->
-<div class="w3-container w3-blues w3-center" style="position:center; padding:128px 16px">
-<h1>SERVIZI ADMIN</h1>
+<div id="servizi" class="w3-container w3-blues w3-center" style="position:center; padding:128px 16px">
+  <h1>SERVIZI ADMIN</h1>
+
+  <label id="typet" for="type">Tipi:</label>
+  <select name="types" id="types" onchange="setCategory()">
+    <option value="tutti">tutti</option>
+    <option value="abbonamenti">abbonamenti</option>
+    <option value="biglietti">biglietti</option>
+  </select>
+  
+  <label for="cat">Categorie:</label>
+  <select name="categoriesF" id="categoriesF">
+    
+  </select>  
+  <button type="submit" onclick="callPHP()"> Cerca</button>
+  <br><br>
+
+  <div id="tabService">
   <?php 
     // Function to get data from admin
     function getDataAdmin(string $query) {
@@ -259,6 +275,8 @@ require "../sessions/adminSession.php";
       echo getData($_SESSION['idUserTypeFK']);
     }
   ?>
+  </div>
+
 </div>
 
 <div style="padding-left: 50px;">
@@ -347,6 +365,95 @@ function toggle() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+function setCategory() {
+  let x = document.getElementById("categoriesF");
+  
+  let select = document.getElementById('types');
+  let option = select.options[select.selectedIndex];
+  
+  for (i = 0; i < select.length; i++) {
+    x.remove(i);
+  }
+
+  if (option.value === "abbonamenti") {
+    for (i = 0; i < select.length; i++) {
+      x.remove(i);
+    }
+    let option = document.createElement("option");
+    option.value = "reteUrbanaS";
+    option.text = "rete urbana + suburbana";
+    x.add(option);
+
+    let option2 = document.createElement("option");
+    option2.value = "urbana";
+    option2.text = "urbana";
+    x.add(option2);
+
+    let option3 = document.createElement("option");
+    option3.value = "subUrbana";
+    option3.text = "sub urbana";
+    x.add(option3);
+
+  } else if (option.value === "tutti") {
+    for (i = 0; i < select.length; i++) {
+      x.remove(i);
+    }
+    for (i = 0; i < select.length; i++) {
+      x.remove(i);
+    }
+  } else {
+    for (i = 0; i < select.length; i++) {
+      x.remove(i);
+    }
+    let option = document.createElement("option");
+    option.value = "city";
+    option.text = "city";
+    x.add(option);
+
+    let option2 = document.createElement("option");
+    option2.value = "daily";
+    option2.text = "daily";
+    x.add(option2);
+
+    let option3 = document.createElement("option");
+    option3.value = "multicity";
+    option3.text = "multicity";
+    x.add(option3);
+
+    let option4 = document.createElement("option");
+    option4.value = "special";
+    option4.text = "special";
+    x.add(option4);
+  }
+}
+
+function callPHP(params) {
+    var httpc = new XMLHttpRequest(); // simplified for clarity
+    var url = "/gtt/src/afterLogin/adminServices/actions/updateSearch.php";
+    
+    let select = document.getElementById('types');
+    let option = select.options[select.selectedIndex];
+
+    let select1 = document.getElementById('categoriesF');
+    let option1 = select.options[select.selectedIndex];
+
+    var data = {
+      categoriesF: option1.value,
+      types: option.value
+    };
+    httpc.open("POST", url, true); // sending as POST
+
+    httpc.onreadystatechange = function() { //Call a function when the state changes.
+        if(httpc.readyState == 4 && httpc.status == 200) { // complete and no errors
+          document.getElementById("tabService").innerHTML = "";
+          document.getElementById("tabService").innerHTML = httpc.responseText;
+        }
+    };
+    httpc.send(data);
+}
 </script>
+
+
 </body>
 </html>
