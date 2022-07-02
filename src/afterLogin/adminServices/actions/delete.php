@@ -34,11 +34,11 @@ function EchoMessage($msg, $redirect)
             // Redirect
             $msg="Servizio eliminato correttamente";
             $newpage = '../adminServices.php';
-        EchoMessage($msg, $newpage);
+            EchoMessage($msg, $newpage);
 
         } catch (Exception $e) {
             // Redirect
-            $msg= 'Caught exception: ' .  $e->getMessage() . "\n";
+            $msg= 'Caught exception: ' .  $e->getMessage();
             $newpage = '../adminServices.php';
             EchoMessage($msg, $newpage);
         }

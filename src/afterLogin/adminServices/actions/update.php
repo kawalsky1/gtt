@@ -57,14 +57,12 @@ function EchoMessage($msg, $redirect)
             EchoMessage($msg, $newpage);                
         } catch (Exception $e) {
             // Redirect
-            $connection->close(); 
             $msg= 'Caught exception: ' .  $e->getMessage() . "\n";
             $newpage = '../adminServices.php';
             EchoMessage($msg, $newpage);
         }
     } else {
         // Redirect
-        $connection->close(); 
         $msg="Errore, riprovare!";
         $newpage = '../adminServices.php';
         EchoMessage($msg, $newpage);
