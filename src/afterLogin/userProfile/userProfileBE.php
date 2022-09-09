@@ -31,7 +31,7 @@ function EchoMessage($m, $redirect)
     if(strlen($rpassword) > 0 && strlen($password) > 0){    
         if($password == $rpassword){
             $password = md5($password);
-            $query="UPDATE users SET password = '$password' WHERE idUserPK = $idUsr";  
+            $query="UPDATE users SET pswd = '$password' WHERE idUserPK = $idUsr";  
             // Query execution
             $connection->query($query);
             $msg= $msg . '- Password updates correctly.\n';
